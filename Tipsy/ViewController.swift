@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     var tip = 0
     var bill = 0.0
@@ -25,6 +25,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        totalBill.delegate = self
+        
         stepper.value = 2.0
         
         reUpdateTip()
@@ -58,6 +60,14 @@ class ViewController: UIViewController {
         let endIndex = str.index(str.startIndex, offsetBy: str.count - 2)
         let slicedString = str[startIndex...endIndex]
         tip = Int(slicedString)!
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        totalBill.endEditing(true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     
